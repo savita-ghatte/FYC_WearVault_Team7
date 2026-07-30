@@ -1,245 +1,272 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Sign Up</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Sign Up</title>
 
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, Helvetica, sans-serif;
-        }
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
 
-        body {
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: linear-gradient(to bottom, #2c3e50, #000000);
-        }
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(to bottom,#2c3e50,#000);
+}
 
-        .signup-box {
-            width: 380px;
-            text-align: center;
-            background: rgba(255, 255, 255, 0.15);
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(10px);
-            color: #fff;
-        }
+.signup-box{
+    width:400px;
+    background:rgba(255,255,255,.15);
+    backdrop-filter:blur(10px);
+    padding:35px;
+    border-radius:14px;
+    text-align:center;
+    color:#fff;
+    box-shadow:0 8px 30px rgba(0,0,0,.35);
+    transition:.3s;
+}
 
-        .line {
-            width: 100%;
-            height: 2px;
-            background: rgba(255, 255, 255, 0.4);
-            margin: 10px 0 30px;
-        }
+.signup-box:hover{
+    transform:translateY(-3px);
+}
 
-        h1 {
-            font-size: 36px;
-            font-weight: 400;
-            color: #ffffff;
-            margin-bottom: 25px;
-            letter-spacing: 1px;
-        }
+.line,
+.bottom-line{
+    width:100%;
+    height:2px;
+    background:rgba(255,255,255,.35);
+}
 
-        .input-box {
-            display: flex;
-            align-items: center;
-            border-bottom: 2px solid #ffffff;
-            margin: 20px 0;
-            padding: 8px 5px;
-        }
+.line{
+    margin-bottom:25px;
+}
 
-        .input-box i {
-            margin-right: 15px;
-            color: #ffffff;
-            font-size: 18px;
-            width: 20px;
-            text-align: center;
-        }
+.bottom-line{
+    margin-top:25px;
+}
 
-        .input-box input {
-            width: 100%;
-            border: none;
-            outline: none;
-            background: transparent;
-            font-size: 16px;
-            color: #ffffff;
-        }
+h1{
+    font-weight:400;
+    margin-bottom:25px;
+    letter-spacing:1px;
+}
 
-        .input-box input::placeholder {
-            color: #dddddd;
-        }
+.input-box{
+    display:flex;
+    align-items:center;
+    border-bottom:2px solid #fff;
+    margin:20px 0;
+    padding:10px 5px;
+}
 
-        button {
-            width: 100%;
-            padding: 14px;
-            border: none;
-            background: #112233;
-            color: white;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-            border-radius: 4px;
-            margin-top: 15px;
-            transition: background 0.3s;
-        }
+.input-box i{
+    width:22px;
+    margin-right:12px;
+    color:#fff;
+}
 
-        button:hover {
-            background: #1a365d;
-        }
+.input-box input{
+    width:100%;
+    background:transparent;
+    border:none;
+    outline:none;
+    color:#fff;
+    font-size:16px;
+}
 
-        .error-msg {
-            color: #ff6b6b;
-            font-size: 13px;
-            font-weight: bold;
-            margin-top: 15px;
-            display: none;
-            line-height: 1.4;
-        }
+.input-box input::placeholder{
+    color:#ddd;
+}
 
-        .success-msg {
-            color: #51cf66;
-            font-size: 14px;
-            font-weight: bold;
-            margin-top: 15px;
-            display: none;
-        }
+button{
+    width:100%;
+    padding:14px;
+    margin-top:18px;
+    border:none;
+    border-radius:6px;
+    background:#112233;
+    color:#fff;
+    font-size:17px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:all .3s;
+}
 
-        .bottom-line {
-            width: 100%;
-            height: 2px;
-            background: rgba(255, 255, 255, 0.4);
-            margin-top: 30px;
-        }
-    </style>
+button:hover{
+    background:#1b3f66;
+}
+
+button:disabled{
+    opacity:.7;
+    cursor:not-allowed;
+}
+
+.error-msg{
+    color:#ff6b6b;
+    margin-top:15px;
+    display:none;
+    font-size:13px;
+    font-weight:bold;
+}
+
+.success-msg{
+    color:#51cf66;
+    margin-top:15px;
+    display:none;
+    font-size:14px;
+    font-weight:bold;
+}
+
+.login-text{
+    margin-top:20px;
+    color:#ddd;
+    font-size:14px;
+}
+
+.login-text a{
+    color:#4da6ff;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+.login-text a:hover{
+    text-decoration:underline;
+}
+</style>
 </head>
+
 <body>
 
 <div class="signup-box">
 
-    <div class="line"></div>
+<div class="line"></div>
 
-    <h1>Admin Sign Up</h1>
+<h1>Admin Sign Up</h1>
 
-    <form id="adminSignupForm">
-        <div class="input-box">
-            <i class="fa-solid fa-user"></i>
-            <input type="text" id="adminName" placeholder="Full Name" required>
-        </div>
+<form id="adminSignupForm">
 
-        <div class="input-box">
-            <i class="fa-solid fa-envelope"></i>
-            <input type="email" id="adminEmail" placeholder="Admin Email ID" required>
-        </div>
+<div class="input-box">
+<i class="fa-solid fa-user"></i>
+<input type="text" id="adminName" placeholder="Full Name" autocomplete="name" required>
+</div>
 
-        <div class="input-box">
-            <i class="fa-solid fa-lock"></i>
-            <input type="password" id="adminPassword" placeholder="Password" required>
-        </div>
+<div class="input-box">
+<i class="fa-solid fa-envelope"></i>
+<input type="email" id="adminEmail" placeholder="Admin Email" autocomplete="email" required>
+</div>
 
-        <div class="input-box">
-            <i class="fa-solid fa-shield-halved"></i>
-            <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
-        </div>
+<div class="input-box">
+<i class="fa-solid fa-lock"></i>
+<input type="password" id="adminPassword" placeholder="Password" autocomplete="new-password" required>
+</div>
 
-        <button type="submit">REGISTER ADMIN</button>
+<div class="input-box">
+<i class="fa-solid fa-shield-halved"></i>
+<input type="password" id="confirmPassword" placeholder="Confirm Password" autocomplete="new-password" required>
+</div>
 
-        <div id="errorMsg" class="error-msg"></div>
-        <div id="successMsg" class="success-msg">Account created successfully! Redirecting to login...</div>
-    </form>
+<button id="registerBtn" type="submit">REGISTER ADMIN</button>
 
-    <div style="margin-top: 20px; font-size: 14px; color: #ddd;">
-        Already have an admin account? <a href="admin-login.html" style="color:#4da6ff; font-weight:bold; text-decoration:none;">Log In</a>
-    </div>
+<div id="errorMsg" class="error-msg"></div>
+<div id="successMsg" class="success-msg">
+Account created successfully! Redirecting...
+</div>
 
-    <div class="bottom-line"></div>
+</form>
+
+<div class="login-text">
+Already have an admin account?
+<a href="admin-login.html">Log In</a>
+</div>
+
+<div class="bottom-line"></div>
 
 </div>
 
 <script>
-    const form = document.getElementById('adminSignupForm');
-    const nameInput = document.getElementById('adminName');
-    const emailInput = document.getElementById('adminEmail');
-    const passwordInput = document.getElementById('adminPassword');
-    const confirmPasswordInput = document.getElementById('confirmPassword');
-    const errorMsg = document.getElementById('errorMsg');
-    const successMsg = document.getElementById('successMsg');
 
-    function validateEmail(email) {
-        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return re.test(email);
+const form=document.getElementById("adminSignupForm");
+const nameInput=document.getElementById("adminName");
+const emailInput=document.getElementById("adminEmail");
+const passwordInput=document.getElementById("adminPassword");
+const confirmPassword=document.getElementById("confirmPassword");
+const errorMsg=document.getElementById("errorMsg");
+const successMsg=document.getElementById("successMsg");
+const registerBtn=document.getElementById("registerBtn");
+
+function validateEmail(email){
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+form.addEventListener("submit",function(e){
+
+    e.preventDefault();
+
+    errorMsg.style.display="none";
+    successMsg.style.display="none";
+
+    const name=nameInput.value.trimStart();
+    const email=emailInput.value.trim().toLowerCase();
+    const password=passwordInput.value.trim();
+    const confirm=confirmPassword.value.trim();
+
+    if(!validateEmail(email)){
+        errorMsg.textContent="Please enter a valid email address.";
+        errorMsg.style.display="block";
+        return;
     }
 
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
+    if(password.length<6){
+        errorMsg.textContent="Password must contain at least 6 characters.";
+        errorMsg.style.display="block";
+        return;
+    }
 
-        const nameVal = nameInput.value.trim();
-        const emailVal = emailInput.value.trim();
-        const emailValKey = emailVal.toLowerCase();
-        const passVal = passwordInput.value.trim();
-        const confirmPassVal = confirmPasswordInput.value.trim();
+    if(password!==confirm){
+        errorMsg.textContent="Passwords do not match.";
+        errorMsg.style.display="block";
+        return;
+    }
 
-        errorMsg.style.display = 'none';
-        successMsg.style.display = 'none';
+    const admins=JSON.parse(localStorage.getItem("wearvault_admins")) || [];
 
-        if(!validateEmail(emailVal)) {
-            errorMsg.textContent = "Please enter a valid email address.";
-            errorMsg.style.display = 'block';
-            return;
-        }
+    if(admins.some(admin=>admin.email===email)){
+        errorMsg.textContent="Admin account already exists.";
+        errorMsg.style.display="block";
+        return;
+    }
 
-        if (passVal.length < 6) {
-            errorMsg.textContent = "Password must be at least 6 characters long.";
-            errorMsg.style.display = 'block';
-            return;
-        }
+    registerBtn.disabled=true;
+    registerBtn.textContent="Creating Account...";
 
-        if (passVal !== confirmPassVal) {
-            errorMsg.textContent = "Passwords do not match!";
-            errorMsg.style.display = 'block';
-            return;
-        }
-
-        // Fetch existing admins from localStorage
-        const storedAdmins = JSON.parse(localStorage.getItem('wearvault_admins')) || [];
-
-        // Check if email already exists
-        const exists = storedAdmins.some(acc => acc.email.toLowerCase() === emailValKey);
-
-        if (exists) {
-            errorMsg.textContent = "An admin account with this email already exists!";
-            errorMsg.style.display = 'block';
-            return;
-        }
-
-        // Create new admin account object
-        const newAdmin = {
-            name: nameVal,
-            email: emailValKey,
-            password: passVal,
-            role: "Admin"
-        };
-
-        // Save to localStorage
-        storedAdmins.push(newAdmin);
-        localStorage.setItem('wearvault_admins', JSON.stringify(storedAdmins));
-
-        successMsg.style.display = 'block';
-
-        // Redirect to admin login page after 1.5s
-        setTimeout(() => {
-            window.location.href = "adin.html";
-        }, 1500);
+    admins.push({
+        name:name,
+        email:email,
+        password:password,
+        role:"Admin"
     });
+
+    localStorage.setItem("wearvault_admins",JSON.stringify(admins));
+
+    successMsg.style.display="block";
+
+    form.reset();
+
+    setTimeout(()=>{
+        window.location.href="adin.html";
+    },2000);
+
+});
+
 </script>
 
 </body>
