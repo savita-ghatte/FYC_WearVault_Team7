@@ -1,0 +1,141 @@
+/* --- Reset & Page Setup --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(180deg, #bbd6fd 0%, #ffcbdc 100%);
+    color: #333;
+    position: relative;
+    overflow: hidden;
+}
+
+.container {
+    position: relative;
+    z-index: 1;
+    width: 90%;
+    max-width: 580px;
+    padding: 4rem 3.5rem;
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 20px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.sticker {
+    position: absolute;
+    width: 54px;
+    height: 54px;
+    background: rgba(255, 255, 255, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(8px);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    color: #10a36f;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    animation: floatSticker 4s ease-in-out infinite alternate;
+}
+
+.sticker-1 { top: -25px; left: -20px; transform: rotate(-12deg); }
+.sticker-2 { top: -20px; right: -20px; transform: rotate(15deg); animation-delay: 1s; }
+.sticker-3 { bottom: -20px; left: -20px; transform: rotate(10deg); animation-delay: 2s; }
+.sticker-4 { bottom: -25px; right: -20px; transform: rotate(-15deg); animation-delay: 3s; }
+
+@keyframes floatSticker {
+    0% { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(-8px) rotate(6deg); }
+}
+
+.logo {
+    width: 350px;
+    height: 250px;
+    border-radius: 16px;
+    margin-bottom: 1.2rem;
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.1));
+}
+
+h1 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+    letter-spacing: -0.5px;
+    color: #1a1a1a;
+}
+
+h2 {
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: #555;
+    margin-bottom: 3rem;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.btn {
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.25s ease-in-out;
+}
+
+.login-btn {
+    width: 100%;
+    padding: 18px;
+    background: #10a36f;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 22px;
+    font-weight: 600;
+    box-shadow: 0 6px 20px rgba(16, 163, 111, 0.3);
+}
+
+.login-btn:hover {
+    background: #0e8f61;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(16, 163, 111, 0.45);
+}
+
+.signup-btn {
+    width: 100%;
+    padding: 18px;
+    background: rgba(255, 255, 255, 0.5);
+    color: #333;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 8px;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.signup-btn:hover {
+    background: rgba(255, 255, 255, 0.8);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
+}
+
+@media (max-width: 480px) {
+    .sticker { display: none; }
+    .container { width: 95%; padding: 2.5rem 1.5rem; }
+    h1 { font-size: 2.2rem; }
+    h2 { font-size: 1.1rem; }
+    .btn { font-size: 18px; padding: 15px; }
+}

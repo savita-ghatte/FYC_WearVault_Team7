@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WearVault - Sign Up</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #d8d8ff, #f7d6e8, #d8f3ff, #9d8cff);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1100px;
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            padding: 40px;
+            gap: 30px;
+        }
+
+        .form-wrapper {
+            display: flex;
+            width: 100%;
+        }
+
+        /* Left Side */
+        .left {
+            width: 40%;
+            padding: 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .logo-circle {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #8e2de2, #c84cff);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo-circle img {
+            height: 40px;
+            width: 40px;
+            object-fit: contain;
+        }
+
+        .logo-text {
+            margin-left: 15px;
+        }
+
+        .logo-text h2 {
+            color: #5b2c91;
+            font-size: 32px;
+            font-style: italic;
+        }
+
+        .left h1 {
+            font-size: 40px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .left p {
+            font-size: 18px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Right Side */
+        .right {
+            width: 60%;
+            padding-left: 40px;
+        }
+
+        label {
+            display: block;
+            font-size: 16px;
+            font-weight: bold;
+            color: #444;
+            margin-top: 15px;
+            margin-bottom: 8px;
+        }
+
+        .name-box {
+            display: flex;
+            gap: 15px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="number"] {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .phone-wrapper {
+            display: flex;
+            align-items: center;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .phone-prefix {
+            background: #eee;
+            padding: 12px 15px;
+            font-weight: bold;
+            color: #555;
+            border-right: 1px solid #ccc;
+        }
+
+        .phone-wrapper input {
+            border: none;
+            border-radius: 0;
+        }
+
+        input:focus {
+            border-color: #8e2de2;
+        }
+
+        .radio-group {
+            margin-top: 10px;
+            display: flex;
+            gap: 30px;
+        }
+
+        .radio-group label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 0;
+            font-size: 16px;
+            font-weight: normal;
+            cursor: pointer;
+        }
+
+        .captcha {
+            width: 100%;
+            max-width: 350px;
+            height: 60px;
+            background: #f9f9f9;
+            border: 1px solid #d3d3d3;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            margin-top: 10px;
+        }
+
+        .captcha input {
+            width: 20px;
+            height: 20px;
+            margin-right: 12px;
+            cursor: pointer;
+        }
+
+        .message-box {
+            font-size: 15px;
+            font-weight: bold;
+            margin-top: 15px;
+            display: none;
+        }
+
+        .message-box.error { color: #d9534f; }
+        .message-box.success { color: #2e7d32; }
+
+        button[type="submit"] {
+            margin-top: 20px;
+            background: #9c00d9;
+            color: white;
+            border: none;
+            padding: 14px 40px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        button[type="submit"]:hover { background: #8200b5; }
+
+        /* Registered Accounts Section */
+        .accounts-section {
+            border-top: 2px dashed #9d8cff;
+            padding-top: 25px;
+            width: 100%;
+        }
+
+        .accounts-section h2 {
+            font-size: 24px;
+            color: #5b2c91;
+            margin-bottom: 15px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fafafa;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+            font-size: 14px;
+        }
+
+        th {
+            background-color: #8e2de2;
+            color: white;
+        }
+
+        @media (max-width: 850px) {
+            .form-wrapper { flex-direction: column; }
+            .left, .right { width: 100%; padding-left: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <div class="form-wrapper">
+            <div class="left">
+                <div class="logo">
+                    <div class="logo-circle">
+                        <img src="wear.png" alt="WearVault Logo">
+                    </div>
+                    <div class="logo-text">
+                        <h2>WearVault</h2>
+                    </div>
+                </div>
+
+                <h1>Account Sign-Up Form</h1>
+                <p>
+                    Use this form and get started quickly.
+                    Create your WearVault account with a few clicks.
+                </p>
+            </div>
+
+            <div class="right">
+                <form id="signupForm" onsubmit="validateForm(event)" novalidate>
+                    
+                    <label>Your Name <span style="color:red;">*</span></label>
+                    <div class="name-box">
+                        <input type="text" id="fname" placeholder="First Name">
+                        <input type="text" id="lname" placeholder="Last Name">
+                    </div>
+
+                    <label for="email">Email Address <span style="color:red;">*</span></label>
+                    <input type="email" id="email" placeholder="Enter your email">
+
+                    <label for="password">Password <span style="color:red;">*</span></label>
+                    <input type="password" id="password" placeholder="Create a password">
+
+                    <label for="phone">Phone Number (STD +91 India) <span style="color:red;">*</span></label>
+                    <div class="phone-wrapper">
+                        <span class="phone-prefix">+91</span>
+                        <input type="text" id="phone" placeholder="10-digit number" maxlength="10">
+                    </div>
+
+                    <label for="age">Your Age <span style="color:red;">*</span></label>
+                    <input type="number" id="age" placeholder="Age" min="1">
+
+                    <label>Notification Preferences</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="notify" value="email" checked> Email</label>
+                        <label><input type="radio" name="notify" value="phone"> Phone</label>
+                    </div>
+
+                    <label>Verification <span style="color:red;">*</span></label>
+                    <div class="captcha">
+                        <input type="checkbox" id="captcha-check">
+                        <label for="captcha-check" style="margin: 0; font-weight: normal;">I'm not a robot</label>
+                    </div>
+
+                    <div id="statusMessage" class="message-box"></div>
+
+                    <button type="submit">Sign Up</button>
+                    
+                    <div style="margin-top:15px; font-size:14px;">
+                        Already registered? <a href="login.html" style="color:#8e2de2; font-weight:bold;">Log In here</a>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+        <!-- Live Display of Created Accounts -->
+        <div class="accounts-section">
+            <h2>Created Accounts Registry</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Age</th>
+                        <th>Notification</th>
+                    </tr>
+                </thead>
+                <tbody id="accountsTableBody">
+                    <!-- Dynamic Accounts rows -->
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <script>
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        function validatePhone(phone) {
+            // Exactly 10 numeric digits only
+            const re = /^[0-9]{10}$/;
+            return re.test(phone);
+        }
+
+        function renderAccounts() {
+            const accounts = JSON.parse(localStorage.getItem('wearvault_users')) || [];
+            const tbody = document.getElementById('accountsTableBody');
+            
+            if (accounts.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;">No accounts created yet.</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = accounts.map(acc => `
+                <tr>
+                    <td>${acc.fname} ${acc.lname}</td>
+                    <td>${acc.email}</td>
+                    <td>+91 ${acc.phone}</td>
+                    <td>${acc.age}</td>
+                    <td>${acc.notify}</td>
+                </tr>
+            `).join('');
+        }
+
+        function validateForm(event) {
+            event.preventDefault();
+            
+            const fname = document.getElementById('fname').value.trim();
+            const lname = document.getElementById('lname').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const age = document.getElementById('age').value.trim();
+            const captcha = document.getElementById('captcha-check').checked;
+            const notify = document.querySelector('input[name="notify"]:checked').value;
+            const messageBox = document.getElementById('statusMessage');
+
+            // Check empty inputs
+            if (!fname || !lname || !email || !password || !phone || !age || !captcha) {
+                messageBox.textContent = "Please fill in all mandatory fields.";
+                messageBox.className = "message-box error";
+                messageBox.style.display = "block";
+                return;
+            }
+
+            // Email format validation
+            if (!validateEmail(email)) {
+                messageBox.textContent = "Please enter a valid email address.";
+                messageBox.className = "message-box error";
+                messageBox.style.display = "block";
+                return;
+            }
+
+            // Phone validation: exactly 10 digits, no chars/symbols
+            if (!validatePhone(phone)) {
+                messageBox.textContent = "Phone number must be exactly 10 digits with no characters or symbols.";
+                messageBox.className = "message-box error";
+                messageBox.style.display = "block";
+                return;
+            }
+
+            // Save user to Local Storage
+            const accounts = JSON.parse(localStorage.getItem('wearvault_users')) || [];
+            
+            // Check for duplicate email
+            if (accounts.some(acc => acc.email === email)) {
+                messageBox.textContent = "An account with this email already exists.";
+                messageBox.className = "message-box error";
+                messageBox.style.display = "block";
+                return;
+            }
+
+            accounts.push({ fname, lname, email, password, phone, age, notify });
+            localStorage.setItem('wearvault_users', JSON.stringify(accounts));
+
+            messageBox.textContent = "Sign-up Successful! Account created.";
+            messageBox.className = "message-box success";
+            messageBox.style.display = "block";
+
+            renderAccounts();
+
+            setTimeout(() => {
+                window.location.href = "login.html";
+            }, 1500);
+        }
+
+        // Initialize table on load
+        document.addEventListener('DOMContentLoaded', renderAccounts);
+    </script>
+
+</body>
+</html>

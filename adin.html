@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Login</title>
+    <title>Admin Login</title>
 
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -21,45 +21,46 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(to bottom, #b6d4ff, #f6c4d4);
+            background: linear-gradient(to bottom, #2c3e50, #000000);
         }
 
         .login-box {
             width: 380px;
             text-align: center;
-            background: rgba(255, 255, 255, 0.25);
+            background: rgba(255, 255, 255, 0.15);
             padding: 30px;
             border-radius: 12px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(8px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            color: #fff;
         }
 
         .line {
             width: 100%;
             height: 2px;
-            background: #fff;
+            background: rgba(255, 255, 255, 0.4);
             margin: 10px 0 30px;
-            opacity: 0.8;
         }
 
         h1 {
-            font-size: 40px;
-            font-weight: 300;
-            color: #222;
+            font-size: 36px;
+            font-weight: 400;
+            color: #ffffff;
             margin-bottom: 30px;
+            letter-spacing: 1px;
         }
 
         .input-box {
             display: flex;
             align-items: center;
-            border-bottom: 2px solid #333;
+            border-bottom: 2px solid #ffffff;
             margin: 25px 0 15px 0;
             padding: 8px 5px;
         }
 
         .input-box i {
             margin-right: 15px;
-            color: #222;
+            color: #ffffff;
             font-size: 18px;
             width: 20px;
             text-align: center;
@@ -71,6 +72,11 @@
             outline: none;
             background: transparent;
             font-size: 16px;
+            color: #ffffff;
+        }
+
+        .input-box input::placeholder {
+            color: #dddddd;
         }
 
         .options {
@@ -86,12 +92,12 @@
             align-items: center;
             gap: 6px;
             cursor: pointer;
-            color: #333;
+            color: #eee;
         }
 
         .options a {
             text-decoration: none;
-            color: #062c5c;
+            color: #4da6ff;
             font-weight: bold;
         }
 
@@ -103,7 +109,7 @@
             width: 100%;
             padding: 14px;
             border: none;
-            background: #062c5c;
+            background: #112233;
             color: white;
             font-size: 18px;
             font-weight: bold;
@@ -114,11 +120,11 @@
         }
 
         button:hover {
-            background: #0b3c7d;
+            background: #1a365d;
         }
 
         .error-msg {
-            color: #d9534f;
+            color: #ff6b6b;
             font-size: 13px;
             font-weight: bold;
             margin-top: 15px;
@@ -127,7 +133,7 @@
         }
 
         .success-msg {
-            color: #28a745;
+            color: #51cf66;
             font-size: 14px;
             font-weight: bold;
             margin-top: 15px;
@@ -137,9 +143,8 @@
         .bottom-line {
             width: 100%;
             height: 2px;
-            background: #fff;
+            background: rgba(255, 255, 255, 0.4);
             margin-top: 30px;
-            opacity: 0.8;
         }
     </style>
 </head>
@@ -149,17 +154,17 @@
 
     <div class="line"></div>
 
-    <h1>User Login</h1>
+    <h1>Admin Login</h1>
 
-    <form id="loginForm">
+    <form id="adminLoginForm">
         <div class="input-box">
-            <i class="fa-solid fa-envelope"></i>
-            <input type="email" id="email" placeholder="Email ID" required>
+            <i class="fa-solid fa-user-shield"></i>
+            <input type="email" id="adminEmail" placeholder="Admin Email ID" required>
         </div>
 
         <div class="input-box">
-            <i class="fa-solid fa-lock"></i>
-            <input type="password" id="password" placeholder="Password" required>
+            <i class="fa-solid fa-key"></i>
+            <input type="password" id="adminPassword" placeholder="Password" required>
         </div>
 
         <div class="options">
@@ -170,14 +175,14 @@
             <a href="fgpp.html">Forgot Password?</a>
         </div>
 
-        <button type="submit">LOGIN</button>
+        <button type="submit">ADMIN LOGIN</button>
 
         <div id="errorMsg" class="error-msg"></div>
-        <div id="successMsg" class="success-msg">Login successful! Redirecting...</div>
+        <div id="successMsg" class="success-msg">Authentication successful! Redirecting...</div>
     </form>
 
-    <div style="margin-top: 20px; font-size: 14px;">
-        Don't have an account? <a href="signup.html" style="color:#062c5c; font-weight:bold; text-decoration:none;">Sign Up</a>
+    <div style="margin-top: 20px; font-size: 14px; color: #ddd;">
+        Don't have an admin account? <a href="adsignup.html" style="color:#4da6ff; font-weight:bold; text-decoration:none;">Sign Up</a>
     </div>
 
     <div class="bottom-line"></div>
@@ -185,17 +190,17 @@
 </div>
 
 <script>
-    const form = document.getElementById('loginForm');
-    const emailInput = document.getElementById('email');
-    const passwordInput = document.getElementById('password');
+    const form = document.getElementById('adminLoginForm');
+    const emailInput = document.getElementById('adminEmail');
+    const passwordInput = document.getElementById('adminPassword');
     const rememberMeCheckbox = document.getElementById('rememberMe');
     const errorMsg = document.getElementById('errorMsg');
     const successMsg = document.getElementById('successMsg');
 
-    // Check localStorage for saved credentials when typing or changing email
+    // Auto-fill password if remembered
     function checkAndAutoFillPassword() {
         const enteredEmail = emailInput.value.trim().toLowerCase();
-        const savedMap = JSON.parse(localStorage.getItem('wearvault_remembered_map')) || {};
+        const savedMap = JSON.parse(localStorage.getItem('wearvault_admin_remembered_map')) || {};
 
         if (enteredEmail && savedMap[enteredEmail]) {
             passwordInput.value = savedMap[enteredEmail];
@@ -206,7 +211,6 @@
         }
     }
 
-    // Listen for input, change, and blur events on the Email field
     emailInput.addEventListener('input', checkAndAutoFillPassword);
     emailInput.addEventListener('change', checkAndAutoFillPassword);
 
@@ -218,50 +222,51 @@
     form.addEventListener('submit', function(e) {
         e.preventDefault();
 
-        const userVal = emailInput.value.trim();
-        const userValKey = userVal.toLowerCase();
+        const adminVal = emailInput.value.trim();
+        const adminValKey = adminVal.toLowerCase();
         const passVal = passwordInput.value.trim();
 
         errorMsg.style.display = 'none';
         successMsg.style.display = 'none';
 
-        if(!validateEmail(userVal)) {
-            errorMsg.textContent = "Please enter a valid email address.";
+        if(!validateEmail(adminVal)) {
+            errorMsg.textContent = "Please enter a valid administrator email address.";
             errorMsg.style.display = 'block';
             return;
         }
 
-        // Fetch accounts created via signup.html
-        const storedAccounts = JSON.parse(localStorage.getItem('wearvault_users')) || [];
+        // Fetch accounts created via adsignup.html
+        const storedAdmins = JSON.parse(localStorage.getItem('wearvault_admins')) || [];
         
-        // Find registered user by email
-        const userAccount = storedAccounts.find(acc => acc.email.toLowerCase() === userValKey);
+        // Find registered admin by email
+        const adminAccount = storedAdmins.find(acc => acc.email.toLowerCase() === adminValKey);
 
-        if (!userAccount) {
-            errorMsg.textContent = "Invalid ID. Please Sign Up first!";
+        if (!adminAccount) {
+            errorMsg.textContent = "Invalid Admin ID. Please Sign Up first!";
             errorMsg.style.display = 'block';
             return;
         }
 
-        // Verify password against stored account
-        if (userAccount.password === passVal) {
-            let savedMap = JSON.parse(localStorage.getItem('wearvault_remembered_map')) || {};
+        // Verify password against stored admin account
+        if (adminAccount.password === passVal) {
+            let savedMap = JSON.parse(localStorage.getItem('wearvault_admin_remembered_map')) || {};
 
             if (rememberMeCheckbox.checked) {
-                savedMap[userValKey] = passVal;
+                savedMap[adminValKey] = passVal;
             } else {
-                delete savedMap[userValKey];
+                delete savedMap[adminValKey];
             }
 
-            localStorage.setItem('wearvault_remembered_map', JSON.stringify(savedMap));
-            localStorage.setItem('currentUser', JSON.stringify(userAccount));
+            localStorage.setItem('wearvault_admin_remembered_map', JSON.stringify(savedMap));
+            localStorage.setItem('currentAdmin', JSON.stringify(adminAccount));
             
             successMsg.style.display = 'block';
             setTimeout(() => {
-                window.location.href = "index.html";
+                // Link updated to admin.html
+                window.location.href = "admin.html";
             }, 1000);
         } else {
-            errorMsg.textContent = "Invalid password. Please try again.";
+            errorMsg.textContent = "Invalid administrator password. Access denied.";
             errorMsg.style.display = 'block';
         }
     });

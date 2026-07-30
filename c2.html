@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>My Wardrobe Customizer</title>
+
+<style>
+body {
+    font-family: Arial;
+    text-align: center;
+    background: #f2f2f2;
+}
+
+.wardrobe {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.card {
+    background: white;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.card img {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+}
+
+.preview {
+    margin-top: 30px;
+    background: white;
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+    border-radius: 15px;
+}
+
+.preview img {
+    width: 150px;
+    display: block;
+    margin: 10px auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<h1>My Wardrobe</h1>
+
+<!-- Upload clothes -->
+<input type="file" id="upload" accept="image/*">
+
+<h2>Uploaded Clothes</h2>
+
+<div class="wardrobe" id="wardrobe"></div>
+
+
+<h2>Customized Outfit</h2>
+
+<div class="preview">
+
+<img id="shirt" src="img0.jpeg" alt="Top">
+<img id="pant" src="img11.jpeg" alt="Bottom">
+<img id="shoe" src="img20.jpeg" alt="Shoes">
+
+</div>
+
+
+<script>
+
+let wardrobe = document.getElementById("wardrobe");
+
+document.getElementById("upload").addEventListener("change", function(event){
+
+    let file = event.target.files[0];
+
+    let image = document.createElement("img");
+    image.src = URL.createObjectURL(file);
+
+    let div = document.createElement("div");
+    div.className = "card";
+
+    div.appendChild(image);
+
+    div.onclick = function(){
+
+        let type = prompt("Enter type: shirt / pant / shoe");
+
+        if(type == "shirt"){
+            document.getElementById("shirt").src = image.src;
+        }
+
+        else if(type == "pant"){
+            document.getElementById("pant").src = image.src;
+        }
+
+        else if(type == "shoe"){
+            document.getElementById("shoe").src = image.src;
+        }
+
+    };
+
+    wardrobe.appendChild(div);
+
+});
+
+</script>
+
+</body>
+</html>

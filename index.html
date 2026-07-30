@@ -4,19 +4,100 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Wardrobe — Editorial Archive</title>
-  <!-- Typography Archetype: Fraunces (Display) + DM Sans (Body) + DM Mono (Data) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* Top Navigation Header Bar with Corner Logout */
+    .top-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
+      border-bottom: 1px solid #D6D3C8;
+      margin-bottom: 1.5rem;
+    }
+
+    .user-greeting {
+      font-family: var(--font-data, monospace);
+      font-size: 0.9rem;
+      color: #111;
+    }
+
+    .logout-btn {
+      background: #062c5c;
+      color: #ffffff;
+      border: none;
+      padding: 8px 18px;
+      font-size: 0.85rem;
+      font-weight: bold;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+      text-decoration: none;
+    }
+
+    .logout-btn:hover {
+      background: #d9534f;
+    }
+
+    /* Size Selector Styles */
+    .size-selector-wrapper {
+      margin: 8px 0;
+    }
+
+    .size-title {
+      font-size: 0.75rem;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+      display: block;
+    }
+
+    .size-buttons {
+      display: flex;
+      gap: 4px;
+      flex-wrap: wrap;
+    }
+
+    .size-btn {
+      background: #f5f4f0;
+      border: 1px solid #d6d3c8;
+      color: #111;
+      padding: 3px 8px;
+      font-size: 0.75rem;
+      font-family: var(--font-data, monospace);
+      cursor: pointer;
+      border-radius: 3px;
+      transition: all 0.2s ease;
+    }
+
+    .size-btn:hover {
+      border-color: #111;
+    }
+
+    .size-btn.selected {
+      background: #111;
+      color: #fff;
+      border-color: #111;
+    }
+  </style>
 </head>
 <body>
+
+  <!-- Top bar with user context and top-corner Log Out button -->
+  <div class="top-header">
+    <div class="user-greeting" id="userGreeting">Welcome, Guest</div>
+    <button class="logout-btn" id="logoutBtn" onclick="logoutUser()">Log Out</button>
+  </div>
 
   <!-- Editorial Header Banner -->
   <header class="masthead">
     <div class="masthead__meta">Edition 01</div>
     <h1 class="masthead__title">WearVault</h1>
-    <div class="masthead__tagline">Style  Store  Repeat...</div>
+    <div class="masthead__tagline">Style &bull; Store &bull; Repeat...</div>
   </header>
 
   <!-- Macro Editorial Layout Grid -->
@@ -78,15 +159,13 @@
         </div>
       </div>
 
-      <!-- Live Interactive Wardrobe Grid (25 items) -->
       <div class="archive-grid" id="archiveGrid">
-       
-        <!-- Outerwear Section (4 Items) -->
+        <!-- Grid Products -->
         <article class="clothing-card" data-id="1" data-category="outerwear" data-season="winter" data-color="camel">
           <div class="card-visual">
             <div class="placeholder-silhouette">Trench</div>
-  <center> <img src="img1.webp" height="250px" width="285px"></center>         
-<button class="favorite-trigger" aria-label="Favorite item"><span>★</span></button>
+            <center><img src="img1.webp" height="250px" width="285px"></center>         
+            <button class="favorite-trigger" aria-label="Favorite item"><span>★</span></button>
             <div class="hover-overlay">
               <button class="action-btn add-to-outfit-btn">Add to Outfit</button>
             </div>
@@ -94,9 +173,19 @@
           <div class="card-meta">
             <div class="card-meta__brand">Toteme</div>
             <h3 class="card-meta__name">Classic Wool Cashmere Coat</h3>
+            <div class="size-selector-wrapper">
+              <span class="size-title">Select Size:</span>
+              <div class="size-buttons">
+                <button class="size-btn">S</button>
+                <button class="size-btn selected">M</button>
+                <button class="size-btn">L</button>
+                <button class="size-btn">XL</button>
+                <button class="size-btn">XXL</button>
+              </div>
+            </div>
             <div class="card-meta__foot">
               <span class="color-dot" style="background-color: #A88B6E;"></span>
-              <span class="mono-data">$1,250</span>
+              <span class="mono-data">₹1,250</span>
             </div>
           </div>
         </article>
@@ -104,7 +193,7 @@
         <article class="clothing-card" data-id="2" data-category="outerwear" data-season="autumn" data-color="black">
           <div class="card-visual">
             <div class="placeholder-silhouette">Leather</div>
- <center> <img src="img2.jpeg" height="250px" width="290px"></center>  
+            <center><img src="img2.jpeg" height="250px" width="290px"></center>  
             <button class="favorite-trigger is-favorite" aria-label="Favorite item"><span>★</span></button>
             <div class="hover-overlay">
               <button class="action-btn add-to-outfit-btn">Add to Outfit</button>
@@ -112,12 +201,20 @@
           </div>
           <div class="card-meta">
             <div class="card-meta__brand">Acne Studios</div>
-            <h3 class="card-meta__name">Oversized Biker Jacket</h3>                                                                                                                                                                                                                                                                                                                                                                                                                            
-
-
+            <h3 class="card-meta__name">Oversized Biker Jacket</h3>
+            <div class="size-selector-wrapper">
+              <span class="size-title">Select Size:</span>
+              <div class="size-buttons">
+                <button class="size-btn">S</button>
+                <button class="size-btn selected">M</button>
+                <button class="size-btn">L</button>
+                <button class="size-btn">XL</button>
+                <button class="size-btn">XXL</button>
+              </div>
+            </div>
             <div class="card-meta__foot">
               <span class="color-dot" style="background-color: #000000;"></span>
-              <span class="mono-data">$1,650</span>
+              <span class="mono-data">₹1,650</span>
             </div>
           </div>
         </article>
@@ -125,7 +222,7 @@
         <article class="clothing-card" data-id="3" data-category="outerwear" data-season="spring" data-color="grey">
           <div class="card-visual">
             <div class="placeholder-silhouette">Blazer</div>
-<center> <img src="img3.jpeg" height="250px" width="290px"></center>
+            <center><img src="img3.jpeg" height="250px" width="290px"></center>
             <button class="favorite-trigger" aria-label="Favorite item"><span>★</span></button>
             <div class="hover-overlay">
               <button class="action-btn add-to-outfit-btn">Add to Outfit</button>
@@ -134,9 +231,19 @@
           <div class="card-meta">
             <div class="card-meta__brand">The Row</div>
             <h3 class="card-meta__name">Margot Tailored Blazer</h3>
+            <div class="size-selector-wrapper">
+              <span class="size-title">Select Size:</span>
+              <div class="size-buttons">
+                <button class="size-btn">S</button>
+                <button class="size-btn selected">M</button>
+                <button class="size-btn">L</button>
+                <button class="size-btn">XL</button>
+                <button class="size-btn">XXL</button>
+              </div>
+            </div>
             <div class="card-meta__foot">
               <span class="color-dot" style="background-color: #706E64;"></span>
-              <span class="mono-data">$2,450</span>
+              <span class="mono-data">₹2,450</span>
             </div>
           </div>
         </article>
@@ -144,7 +251,7 @@
         <article class="clothing-card" data-id="4" data-category="outerwear" data-season="spring" data-color="olive">
           <div class="card-visual">
             <div class="placeholder-silhouette">Utility</div>
-<center> <img src="img4.jpeg" height="250px" width="290px"></center>
+            <center><img src="img4.jpeg" height="250px" width="290px"></center>
             <button class="favorite-trigger" aria-label="Favorite item"><span>★</span></button>
             <div class="hover-overlay">
               <button class="action-btn add-to-outfit-btn">Add to Outfit</button>
@@ -153,18 +260,28 @@
           <div class="card-meta">
             <div class="card-meta__brand">Barbour</div>
             <h3 class="card-meta__name">Waxed Utility Jacket</h3>
+            <div class="size-selector-wrapper">
+              <span class="size-title">Select Size:</span>
+              <div class="size-buttons">
+                <button class="size-btn">S</button>
+                <button class="size-btn selected">M</button>
+                <button class="size-btn">L</button>
+                <button class="size-btn">XL</button>
+                <button class="size-btn">XXL</button>
+              </div>
+            </div>
             <div class="card-meta__foot">
               <span class="color-dot" style="background-color: #3F4E3F;"></span>
-              <span class="mono-data">$420</span>
+              <span class="mono-data">₹420</span>
             </div>
           </div>
         </article>
 
-        <!-- Tops & Knitwear (6 Items) -->
+        <!-- Tops & Knitwear -->
         <article class="clothing-card" data-id="5" data-category="tops" data-season="winter" data-color="black">
           <div class="card-visual">
             <div class="placeholder-silhouette">Knit</div>
-<center> <img src="img5.jpeg" height="250px" width="290px"></center>
+            <center><img src="img5.jpeg" height="250px" width="290px"></center>
             <button class="favorite-trigger is-favorite" aria-label="Favorite item"><span>★</span></button>
             <div class="hover-overlay">
               <button class="action-btn add-to-outfit-btn">Add to Outfit</button>
@@ -173,9 +290,19 @@
           <div class="card-meta">
             <div class="card-meta__brand">Khaite</div>
             <h3 class="card-meta__name">The Maddy Ribbed Knit</h3>
+            <div class="size-selector-wrapper">
+              <span class="size-title">Select Size:</span>
+              <div class="size-buttons">
+                <button class="size-btn">S</button>
+                <button class="size-btn selected">M</button>
+                <button class="size-btn">L</button>
+                <button class="size-btn">XL</button>
+                <button class="size-btn">XXL</button>
+              </div>
+            </div>
             <div class="card-meta__foot">
               <span class="color-dot" style="background-color: #000000;"></span>
-              <span class="mono-data">$780</span>
+              <span class="mono-data">₹780</span>
             </div>
           </div>
         </article>
@@ -183,7 +310,7 @@
         <article class="clothing-card" data-id="6" data-category="tops" data-season="winter" data-color="white">
           <div class="card-visual">
             <div class="placeholder-silhouette">Cashmere</div>
-<center> <img src="img6.jpeg" height="250px" width="320px"></center>
+            <center><img src="img6.jpeg" height="250px" width="320px"></center>
             <button class="favorite-trigger" aria-label="Favorite item"><span>★</span></button>
             <div class="hover-overlay">
               <button class="action-btn add-to-outfit-btn">Add to Outfit</button>
@@ -192,9 +319,19 @@
           <div class="card-meta">
             <div class="card-meta__brand">Loro Piana</div>
             <h3 class="card-meta__name">Classic Cashmere Crewneck</h3>
+            <div class="size-selector-wrapper">
+              <span class="size-title">Select Size:</span>
+              <div class="size-buttons">
+                <button class="size-btn">S</button>
+                <button class="size-btn selected">M</button>
+                <button class="size-btn">L</button>
+                <button class="size-btn">XL</button>
+                <button class="size-btn">XXL</button>
+              </div>
+            </div>
             <div class="card-meta__foot">
               <span class="color-dot" style="background-color: #FFFFFF; border: 1px solid #d6d3c8;"></span>
-              <span class="mono-data">$1,480</span>
+              <span class="mono-data">₹1,480</span>
             </div>
           </div>
         </article>
@@ -202,8 +339,7 @@
         <article class="clothing-card" data-id="7" data-category="tops" data-season="spring" data-color="white">
           <div class="card-visual">
             <div class="placeholder-silhouette">Poplin</div>
-<center> <img src="img7.avif" height="250px" width="320px"></center>
-
+            <center><img src="img7.avif" height="250px" width="320px"></center>
             <button class="favorite-trigger" aria-label="Favorite item"><span>★</span></button>
             <div class="hover-overlay">
               <button class="action-btn add-to-outfit-btn">Add to Outfit</button>
@@ -212,9 +348,19 @@
           <div class="card-meta">
             <div class="card-meta__brand">Jil Sander</div>
             <h3 class="card-meta__name">Oversized Poplin Shirt</h3>
+            <div class="size-selector-wrapper">
+              <span class="size-title">Select Size:</span>
+              <div class="size-buttons">
+                <button class="size-btn">S</button>
+                <button class="size-btn selected">M</button>
+                <button class="size-btn">L</button>
+                <button class="size-btn">XL</button>
+                <button class="size-btn">XXL</button>
+              </div>
+            </div>
             <div class="card-meta__foot">
               <span class="color-dot" style="background-color: #FFFFFF; border: 1px solid #d6d3c8;"></span>
-              <span class="mono-data">$690</span>
+              <span class="mono-data">₹690</span>
             </div>
           </div>
         </article>
@@ -222,8 +368,7 @@
         <article class="clothing-card" data-id="8" data-category="tops" data-season="summer" data-color="black">
           <div class="card-visual">
             <div class="placeholder-silhouette">Silk</div>
-<center> <img src="img8.jpeg" height="250px" width="320px"></center>
-
+            <center><img src="img8.jpeg" height="250px" width="320px"></center>
             <button class="favorite-trigger" aria-label="Favorite item"><span>★</span></button>
             <div class="hover-overlay">
               <button class="action-btn add-to-outfit-btn">Add to Outfit</button>
@@ -232,9 +377,19 @@
           <div class="card-meta">
             <div class="card-meta__brand">Equipment</div>
             <h3 class="card-meta__name">Slim Signature Silk Shirt</h3>
+            <div class="size-selector-wrapper">
+              <span class="size-title">Select Size:</span>
+              <div class="size-buttons">
+                <button class="size-btn">S</button>
+                <button class="size-btn selected">M</button>
+                <button class="size-btn">L</button>
+                <button class="size-btn">XL</button>
+                <button class="size-btn">XXL</button>
+              </div>
+            </div>
             <div class="card-meta__foot">
               <span class="color-dot" style="background-color: #000000;"></span>
-              <span class="mono-data">$280</span>
+              <span class="mono-data">₹280</span>
             </div>
           </div>
         </article>
@@ -242,8 +397,7 @@
         <article class="clothing-card" data-id="9" data-category="tops" data-season="summer" data-color="grey">
           <div class="card-visual">
             <div class="placeholder-silhouette">Jersey</div>
-<center> <img src="img9.jpeg" height="250px" width="320px"></center>
-
+            <center><img src="img9.jpeg" height="250px" width="320px"></center>
             <button class="favorite-trigger" aria-label="Favorite item"><span>★</span></button>
             <div class="hover-overlay">
               <button class="action-btn add-to-outfit-btn">Add to Outfit</button>
@@ -252,9 +406,19 @@
           <div class="card-meta">
             <div class="card-meta__brand">James Perse</div>
             <h3 class="card-meta__name">Casual Slub Cotton Tee</h3>
+            <div class="size-selector-wrapper">
+              <span class="size-title">Select Size:</span>
+              <div class="size-buttons">
+                <button class="size-btn">S</button>
+                <button class="size-btn selected">M</button>
+                <button class="size-btn">L</button>
+                <button class="size-btn">XL</button>
+                <button class="size-btn">XXL</button>
+              </div>
+            </div>
             <div class="card-meta__foot">
               <span class="color-dot" style="background-color: #706E64;"></span>
-              <span class="mono-data">$95</span>
+              <span class="mono-data">₹95</span>
             </div>
           </div>
         </article>
@@ -262,8 +426,7 @@
         <article class="clothing-card" data-id="10" data-category="tops" data-season="autumn" data-color="navy">
           <div class="card-visual">
             <div class="placeholder-silhouette">Cardigan</div>
-<center> <img src="img0.jpeg" height="250px" width="320px"></center>
-
+            <center><img src="img0.jpeg" height="250px" width="320px"></center>
             <button class="favorite-trigger" aria-label="Favorite item"><span>★</span></button>
             <div class="hover-overlay">
               <button class="action-btn add-to-outfit-btn">Add to Outfit</button>
@@ -272,19 +435,28 @@
           <div class="card-meta">
             <div class="card-meta__brand">Comme des Garçons</div>
             <h3 class="card-meta__name">Play Heart Cardigan</h3>
+            <div class="size-selector-wrapper">
+              <span class="size-title">Select Size:</span>
+              <div class="size-buttons">
+                <button class="size-btn">S</button>
+                <button class="size-btn selected">M</button>
+                <button class="size-btn">L</button>
+                <button class="size-btn">XL</button>
+                <button class="size-btn">XXL</button>
+              </div>
+            </div>
             <div class="card-meta__foot">
               <span class="color-dot" style="background-color: #263347;"></span>
-              <span class="mono-data">$415</span>
+              <span class="mono-data">₹415</span>
             </div>
           </div>
         </article>
 
-        <!-- Bottoms & Denim (5 Items) -->
+        <!-- Bottoms & Denim -->
         <article class="clothing-card" data-id="11" data-category="bottoms" data-season="all" data-color="navy">
           <div class="card-visual">
             <div class="placeholder-silhouette">Denim</div>
-<center> <img src="img11.jpeg" height="250px" width="320px">></center>
-
+            <center><img src="img11.jpeg" height="250px" width="320px"></center>
             <button class="favorite-trigger is-favorite" aria-label="Favorite item"><span>★</span></button>
             <div class="hover-overlay">
               <button class="action-btn add-to-outfit-btn">Add to Outfit</button>
@@ -293,9 +465,19 @@
           <div class="card-meta">
             <div class="card-meta__brand">Agolde</div>
             <h3 class="card-meta__name">90s Pinch Waist High Rise</h3>
+            <div class="size-selector-wrapper">
+              <span class="size-title">Select Size:</span>
+              <div class="size-buttons">
+                <button class="size-btn">S</button>
+                <button class="size-btn selected">M</button>
+                <button class="size-btn">L</button>
+                <button class="size-btn">XL</button>
+                <button class="size-btn">XXL</button>
+              </div>
+            </div>
             <div class="card-meta__foot">
               <span class="color-dot" style="background-color: #263347;"></span>
-              <span class="mono-data">$228</span>
+              <span class="mono-data">₹228</span>
             </div>
           </div>
         </article>
@@ -303,8 +485,7 @@
         <article class="clothing-card" data-id="12" data-category="bottoms" data-season="spring" data-color="black">
           <div class="card-visual">
             <div class="placeholder-silhouette">Trousers</div>
-<center> <img src="img12.jpeg" height="250px" width="320px"></center>
-
+            <center><img src="img12.jpeg" height="250px" width="320px"></center>
             <button class="favorite-trigger" aria-label="Favorite item"><span>★</span></button>
             <div class="hover-overlay">
               <button class="action-btn add-to-outfit-btn">Add to Outfit</button>
@@ -313,9 +494,19 @@
           <div class="card-meta">
             <div class="card-meta__brand">Studio Nicholson</div>
             <h3 class="card-meta__name">Volume Pleated Pants</h3>
+            <div class="size-selector-wrapper">
+              <span class="size-title">Select Size:</span>
+              <div class="size-buttons">
+                <button class="size-btn">S</button>
+                <button class="size-btn selected">M</button>
+                <button class="size-btn">L</button>
+                <button class="size-btn">XL</button>
+                <button class="size-btn">XXL</button>
+              </div>
+            </div>
             <div class="card-meta__foot">
               <span class="color-dot" style="background-color: #000000;"></span>
-              <span class="mono-data">$475</span>
+              <span class="mono-data">₹475</span>
             </div>
           </div>
         </article>
@@ -323,8 +514,7 @@
         <article class="clothing-card" data-id="13" data-category="bottoms" data-season="summer" data-color="white">
           <div class="card-visual">
             <div class="placeholder-silhouette">Linen</div>
-<center> <img src="img13.jpeg" height="250px" width="320px"></center>
-
+            <center><img src="img13.jpeg" height="250px" width="320px"></center>
             <button class="favorite-trigger" aria-label="Favorite item"><span>★</span></button>
             <div class="hover-overlay">
               <button class="action-btn add-to-outfit-btn">Add to Outfit</button>
@@ -333,9 +523,19 @@
           <div class="card-meta">
             <div class="card-meta__brand">Brunello Cucinelli</div>
             <h3 class="card-meta__name">Wide-Leg Linen Trousers</h3>
+            <div class="size-selector-wrapper">
+              <span class="size-title">Select Size:</span>
+              <div class="size-buttons">
+                <button class="size-btn">S</button>
+                <button class="size-btn selected">M</button>
+                <button class="size-btn">L</button>
+                <button class="size-btn">XL</button>
+                <button class="size-btn">XXL</button>
+              </div>
+            </div>
             <div class="card-meta__foot">
               <span class="color-dot" style="background-color: #FFFFFF; border: 1px solid #d6d3c8;"></span>
-              <span class="mono-data">$1,150</span>
+              <span class="mono-data">₹1,150</span>
             </div>
           </div>
         </article>
@@ -343,8 +543,7 @@
         <article class="clothing-card" data-id="14" data-category="bottoms" data-season="autumn" data-color="camel">
           <div class="card-visual">
             <div class="placeholder-silhouette">Chino</div>
-<center> <img src="img14.jpeg" height="250px" width="320px"></center>
-
+            <center><img src="img14.jpeg" height="250px" width="320px"></center>
             <button class="favorite-trigger" aria-label="Favorite item"><span>★</span></button>
             <div class="hover-overlay">
               <button class="action-btn add-to-outfit-btn">Add to Outfit</button>
@@ -353,9 +552,19 @@
           <div class="card-meta">
             <div class="card-meta__brand">Margaret Howell</div>
             <h3 class="card-meta__name">Classic Chino Twill Pants</h3>
+            <div class="size-selector-wrapper">
+              <span class="size-title">Select Size:</span>
+              <div class="size-buttons">
+                <button class="size-btn">S</button>
+                <button class="size-btn selected">M</button>
+                <button class="size-btn">L</button>
+                <button class="size-btn">XL</button>
+                <button class="size-btn">XXL</button>
+              </div>
+            </div>
             <div class="card-meta__foot">
               <span class="color-dot" style="background-color: #A88B6E;"></span>
-              <span class="mono-data">$395</span>
+              <span class="mono-data">₹395</span>
             </div>
           </div>
         </article>
@@ -363,8 +572,7 @@
         <article class="clothing-card" data-id="15" data-category="bottoms" data-season="winter" data-color="grey">
           <div class="card-visual">
             <div class="placeholder-silhouette">Flannel</div>
-<center> <img src="img15.jpeg" height="250px" width="320px"></center>
-
+            <center><img src="img15.jpeg" height="250px" width="320px"></center>
             <button class="favorite-trigger" aria-label="Favorite item"><span>★</span></button>
             <div class="hover-overlay">
               <button class="action-btn add-to-outfit-btn">Add to Outfit</button>
@@ -373,19 +581,28 @@
           <div class="card-meta">
             <div class="card-meta__brand">Issey Miyake</div>
             <h3 class="card-meta__name">Pleats Please Trousers</h3>
+            <div class="size-selector-wrapper">
+              <span class="size-title">Select Size:</span>
+              <div class="size-buttons">
+                <button class="size-btn">S</button>
+                <button class="size-btn selected">M</button>
+                <button class="size-btn">L</button>
+                <button class="size-btn">XL</button>
+                <button class="size-btn">XXL</button>
+              </div>
+            </div>
             <div class="card-meta__foot">
               <span class="color-dot" style="background-color: #706E64;"></span>
-              <span class="mono-data">$380</span>
+              <span class="mono-data">₹380</span>
             </div>
           </div>
         </article>
 
-        <!-- Dresses (3 Items) -->
+        <!-- Dresses -->
         <article class="clothing-card" data-id="16" data-category="dresses" data-season="summer" data-color="black">
           <div class="card-visual">
             <div class="placeholder-silhouette">Dress</div>
-<center> <img src="img06.jpeg" height="250px" width="320px"></center>
-
+            <center><img src="img06.jpeg" height="250px" width="320px"></center>
             <button class="favorite-trigger is-favorite" aria-label="Favorite item"><span>★</span></button>
             <div class="hover-overlay">
               <button class="action-btn add-to-outfit-btn">Add to Outfit</button>
@@ -394,9 +611,19 @@
           <div class="card-meta">
             <div class="card-meta__brand">Jacquemus</div>
             <h3 class="card-meta__name">La Robe Bahia Dress</h3>
+            <div class="size-selector-wrapper">
+              <span class="size-title">Select Size:</span>
+              <div class="size-buttons">
+                <button class="size-btn">S</button>
+                <button class="size-btn selected">M</button>
+                <button class="size-btn">L</button>
+                <button class="size-btn">XL</button>
+                <button class="size-btn">XXL</button>
+              </div>
+            </div>
             <div class="card-meta__foot">
               <span class="color-dot" style="background-color: #000000;"></span>
-              <span class="mono-data">$725</span>
+              <span class="mono-data">₹725</span>
             </div>
           </div>
         </article>
@@ -404,8 +631,7 @@
         <article class="clothing-card" data-id="17" data-category="dresses" data-season="spring" data-color="blush">
           <div class="card-visual">
             <div class="placeholder-silhouette">Slip</div>
-<center> <img src="img17.jpeg" height="250px" width="320px"></center>
-
+            <center><img src="img17.jpeg" height="250px" width="320px"></center>
             <button class="favorite-trigger" aria-label="Favorite item"><span>★</span></button>
             <div class="hover-overlay">
               <button class="action-btn add-to-outfit-btn">Add to Outfit</button>
@@ -414,9 +640,19 @@
           <div class="card-meta">
             <div class="card-meta__brand">Anine Bing</div>
             <h3 class="card-meta__name">Classic Silk Slip Dress</h3>
+            <div class="size-selector-wrapper">
+              <span class="size-title">Select Size:</span>
+              <div class="size-buttons">
+                <button class="size-btn">S</button>
+                <button class="size-btn selected">M</button>
+                <button class="size-btn">L</button>
+                <button class="size-btn">XL</button>
+                <button class="size-btn">XXL</button>
+              </div>
+            </div>
             <div class="card-meta__foot">
               <span class="color-dot" style="background-color: #D4B2A7;"></span>
-              <span class="mono-data">$350</span>
+              <span class="mono-data">₹350</span>
             </div>
           </div>
         </article>
@@ -424,8 +660,7 @@
         <article class="clothing-card" data-id="18" data-category="dresses" data-season="autumn" data-color="olive">
           <div class="card-visual">
             <div class="placeholder-silhouette">Shirt Dress</div>
-<center> <img src="img18.jpeg" height="250px" width="320px"></center>
-
+            <center><img src="img18.jpeg" height="250px" width="320px"></center>
             <button class="favorite-trigger" aria-label="Favorite item"><span>★</span></button>
             <div class="hover-overlay">
               <button class="action-btn add-to-outfit-btn">Add to Outfit</button>
@@ -434,19 +669,28 @@
           <div class="card-meta">
             <div class="card-meta__brand">Lemaire</div>
             <h3 class="card-meta__name">Asymmetric Cotton Dress</h3>
+            <div class="size-selector-wrapper">
+              <span class="size-title">Select Size:</span>
+              <div class="size-buttons">
+                <button class="size-btn">S</button>
+                <button class="size-btn selected">M</button>
+                <button class="size-btn">L</button>
+                <button class="size-btn">XL</button>
+                <button class="size-btn">XXL</button>
+              </div>
+            </div>
             <div class="card-meta__foot">
               <span class="color-dot" style="background-color: #3F4E3F;"></span>
-              <span class="mono-data">$890</span>
+              <span class="mono-data">₹890</span>
             </div>
           </div>
         </article>
 
-        <!-- Footwear (4 Items) -->
+        <!-- Footwear -->
         <article class="clothing-card" data-id="19" data-category="shoes" data-season="all" data-color="black">
           <div class="card-visual">
             <div class="placeholder-silhouette">Loafer</div>
-<center> <img src="img19.jpeg" height="250px" width="320px"></center>
-
+            <center><img src="img19.jpeg" height="250px" width="320px"></center>
             <button class="favorite-trigger is-favorite" aria-label="Favorite item"><span>★</span></button>
             <div class="hover-overlay">
               <button class="action-btn add-to-outfit-btn">Add to Outfit</button>
@@ -455,9 +699,19 @@
           <div class="card-meta">
             <div class="card-meta__brand">Gucci</div>
             <h3 class="card-meta__name">Brixton Leather Loafers</h3>
+            <div class="size-selector-wrapper">
+              <span class="size-title">Select Size:</span>
+              <div class="size-buttons">
+                <button class="size-btn">UK 6</button>
+                <button class="size-btn selected">UK 7</button>
+                <button class="size-btn">UK 8</button>
+                <button class="size-btn">UK 9</button>
+                <button class="size-btn">UK 10</button>
+              </div>
+            </div>
             <div class="card-meta__foot">
               <span class="color-dot" style="background-color: #000000;"></span>
-              <span class="mono-data">$920</span>
+              <span class="mono-data">₹920</span>
             </div>
           </div>
         </article>
@@ -465,8 +719,7 @@
         <article class="clothing-card" data-id="20" data-category="shoes" data-season="winter" data-color="black">
           <div class="card-visual">
             <div class="placeholder-silhouette">Boot</div>
-<center> <img src="img20.jpeg" height="250px" width="320px"></center>
-
+            <center><img src="img20.jpeg" height="250px" width="320px"></center>
             <button class="favorite-trigger" aria-label="Favorite item"><span>★</span></button>
             <div class="hover-overlay">
               <button class="action-btn add-to-outfit-btn">Add to Outfit</button>
@@ -475,9 +728,19 @@
           <div class="card-meta">
             <div class="card-meta__brand">Maison Margiela</div>
             <h3 class="card-meta__name">Tabi Leather Boots</h3>
+            <div class="size-selector-wrapper">
+              <span class="size-title">Select Size:</span>
+              <div class="size-buttons">
+                <button class="size-btn">UK 6</button>
+                <button class="size-btn selected">UK 7</button>
+                <button class="size-btn">UK 8</button>
+                <button class="size-btn">UK 9</button>
+                <button class="size-btn">UK 10</button>
+              </div>
+            </div>
             <div class="card-meta__foot">
               <span class="color-dot" style="background-color: #000000;"></span>
-              <span class="mono-data">$1,150</span>
+              <span class="mono-data">₹1,150</span>
             </div>
           </div>
         </article>
@@ -485,8 +748,7 @@
         <article class="clothing-card" data-id="21" data-category="shoes" data-season="summer" data-color="camel">
           <div class="card-visual">
             <div class="placeholder-silhouette">Sandal</div>
-<center> <img src="img21.jpeg" height="250px" width="320px"></center>
-
+            <center><img src="img21.jpeg" height="250px" width="320px"></center>
             <button class="favorite-trigger" aria-label="Favorite item"><span>★</span></button>
             <div class="hover-overlay">
               <button class="action-btn add-to-outfit-btn">Add to Outfit</button>
@@ -495,9 +757,19 @@
           <div class="card-meta">
             <div class="card-meta__brand">Hermes</div>
             <h3 class="card-meta__name">Oran Leather Sandals</h3>
+            <div class="size-selector-wrapper">
+              <span class="size-title">Select Size:</span>
+              <div class="size-buttons">
+                <button class="size-btn">UK 6</button>
+                <button class="size-btn selected">UK 7</button>
+                <button class="size-btn">UK 8</button>
+                <button class="size-btn">UK 9</button>
+                <button class="size-btn">UK 10</button>
+              </div>
+            </div>
             <div class="card-meta__foot">
               <span class="color-dot" style="background-color: #A88B6E;"></span>
-              <span class="mono-data">$760</span>
+              <span class="mono-data">₹760</span>
             </div>
           </div>
         </article>
@@ -505,8 +777,7 @@
         <article class="clothing-card" data-id="22" data-category="shoes" data-season="spring" data-color="white">
           <div class="card-visual">
             <div class="placeholder-silhouette">Trainer</div>
-<center> <img src="img22.jpeg" height="250px" width="320px"></center>
-
+            <center><img src="img22.jpeg" height="250px" width="320px"></center>
             <button class="favorite-trigger" aria-label="Favorite item"><span>★</span></button>
             <div class="hover-overlay">
               <button class="action-btn add-to-outfit-btn">Add to Outfit</button>
@@ -515,19 +786,28 @@
           <div class="card-meta">
             <div class="card-meta__brand">New Balance</div>
             <h3 class="card-meta__name">990v6 Vintage Made in USA</h3>
+            <div class="size-selector-wrapper">
+              <span class="size-title">Select Size:</span>
+              <div class="size-buttons">
+                <button class="size-btn">UK 6</button>
+                <button class="size-btn selected">UK 7</button>
+                <button class="size-btn">UK 8</button>
+                <button class="size-btn">UK 9</button>
+                <button class="size-btn">UK 10</button>
+              </div>
+            </div>
             <div class="card-meta__foot">
               <span class="color-dot" style="background-color: #FFFFFF; border: 1px solid #d6d3c8;"></span>
-              <span class="mono-data">$200</span>
+              <span class="mono-data">₹200</span>
             </div>
           </div>
         </article>
 
-        <!-- Bags & Accessories (3 Items) -->
+        <!-- Bags & Accessories -->
         <article class="clothing-card" data-id="23" data-category="bags" data-season="all" data-color="black">
           <div class="card-visual">
             <div class="placeholder-silhouette">Tote</div>
-<center> <img src="img23.jpeg" height="250px" width="320px"></center>
-
+            <center><img src="img23.jpeg" height="250px" width="320px"></center>
             <button class="favorite-trigger is-favorite" aria-label="Favorite item"><span>★</span></button>
             <div class="hover-overlay">
               <button class="action-btn add-to-outfit-btn">Add to Outfit</button>
@@ -536,9 +816,15 @@
           <div class="card-meta">
             <div class="card-meta__brand">Celine</div>
             <h3 class="card-meta__name">Medium Classic Box Bag</h3>
+            <div class="size-selector-wrapper">
+              <span class="size-title">Select Size:</span>
+              <div class="size-buttons">
+                <button class="size-btn selected">One Size</button>
+              </div>
+            </div>
             <div class="card-meta__foot">
               <span class="color-dot" style="background-color: #000000;"></span>
-              <span class="mono-data">$4,200</span>
+              <span class="mono-data">₹4,200</span>
             </div>
           </div>
         </article>
@@ -546,8 +832,7 @@
         <article class="clothing-card" data-id="24" data-category="bags" data-season="all" data-color="camel">
           <div class="card-visual">
             <div class="placeholder-silhouette">Saddle Bag</div>
-<center> <img src="img24.jpeg" height="250px" width="320px"></center>
-
+            <center><img src="img24.jpeg" height="250px" width="320px"></center>
             <button class="favorite-trigger" aria-label="Favorite item"><span>★</span></button>
             <div class="hover-overlay">
               <button class="action-btn add-to-outfit-btn">Add to Outfit</button>
@@ -556,9 +841,15 @@
           <div class="card-meta">
             <div class="card-meta__brand">Loewe</div>
             <h3 class="card-meta__name">Small Puzzle Leather Bag</h3>
+            <div class="size-selector-wrapper">
+              <span class="size-title">Select Size:</span>
+              <div class="size-buttons">
+                <button class="size-btn selected">One Size</button>
+              </div>
+            </div>
             <div class="card-meta__foot">
               <span class="color-dot" style="background-color: #A88B6E;"></span>
-              <span class="mono-data">$3,450</span>
+              <span class="mono-data">₹3,450</span>
             </div>
           </div>
         </article>
@@ -566,8 +857,7 @@
         <article class="clothing-card" data-id="25" data-category="bags" data-season="summer" data-color="white">
           <div class="card-visual">
             <div class="placeholder-silhouette">Woven Basket</div>
-<center> <img src="img25.jpeg" height="250px" width="320px"></center>
-
+            <center><img src="img25.jpeg" height="250px" width="320px"></center>
             <button class="favorite-trigger" aria-label="Favorite item"><span>★</span></button>
             <div class="hover-overlay">
               <button class="action-btn add-to-outfit-btn">Add to Outfit</button>
@@ -576,9 +866,15 @@
           <div class="card-meta">
             <div class="card-meta__brand">Bottega Veneta</div>
             <h3 class="card-meta__name">Mini Jodie Woven Bag</h3>
+            <div class="size-selector-wrapper">
+              <span class="size-title">Select Size:</span>
+              <div class="size-buttons">
+                <button class="size-btn selected">One Size</button>
+              </div>
+            </div>
             <div class="card-meta__foot">
               <span class="color-dot" style="background-color: #FFFFFF; border: 1px solid #d6d3c8;"></span>
-              <span class="mono-data">$2,650</span>
+              <span class="mono-data">₹2,650</span>
             </div>
           </div>
         </article>
@@ -622,39 +918,44 @@
         <div class="builder-summary">
           <div class="summary-row">
             <span>Canvas Subtotal</span>
-            <span class="mono-data" id="outfitSubtotal">$0</span>
+            <span class="mono-data" id="outfitSubtotal">₹0</span>
           </div>
           <button class="action-btn action-btn--dark w-full" id="saveOutfitBtn">Go To Cart</button>
+          
+          <!-- Anchor tag added to redirect to customise.html -->
+          <a href="customise.html" style="text-decoration: none; display: block;">
+            <button class="action-btn w-full" id="customiseOutfitBtn" style="margin-top: 10px; background-color: #ffffff; color: #111111; border: 1px solid #111111;">Customise Outfit</button>
+          </a>
         </div>
       </div>
     </aside>
 
   </div>
 
-  <!-- Editorial Ledger Footer Statistics -->
   <footer class="ledger-stats">
     <div class="ledger-stat-block">
       <span class="ledger-label">Curated Vault</span>
       <span class="ledger-value">25 <small class="text-muted">Total Units</small></span>
     </div>
-    <div class="ledger-stat-block">
-      <span class="ledger-label">Archived Value</span>
-      <span class="ledger-value">$28,736<small class="mono-data text-muted" style="font-size:0.75rem; font-weight:400; display:block; margin-top:0.25rem;">Est. Replacement Cost</small></span>
-    </div>
-    <div class="ledger-stat-block">
-      <span class="ledger-label">Uniform Foundations</span>
-      <span class="ledger-value">6 <small class="text-muted">Pinned Favorites</small></span>
-    </div>
-    <div class="ledger-stat-block">
-      <span class="ledger-label">High Utility Piece</span>
-      <span class="ledger-value" style="font-size: 1.1rem;">New Balance 990v6 <small class="text-muted" style="display:block; font-size:0.75rem; margin-top:0.25rem;">112 Lifetime Wears</small></span>
-    </div>
   </footer>
 
-  <!-- Declarative Logic Core -->
   <script>
+    function logoutUser() {
+      localStorage.removeItem('currentUser');
+      window.location.href = "login.html";
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
-      // DOM Selectors
+      // 1. User auth display
+      const user = JSON.parse(localStorage.getItem('currentUser'));
+      const greeting = document.getElementById('userGreeting');
+      if (user) {
+        greeting.textContent = `Logged in as: ${user.fname || user.email}`;
+      } else {
+        greeting.textContent = "Guest Session";
+      }
+
+      // 2. DOM Selectors
       const searchInput = document.getElementById('wardrobeSearch');
       const gridToggle = document.getElementById('gridToggle');
       const listToggle = document.getElementById('listToggle');
@@ -665,22 +966,22 @@
       const cards = document.querySelectorAll('.clothing-card');
       const slots = document.querySelectorAll('.slot');
       const subtotalEl = document.getElementById('outfitSubtotal');
-      const saveBtn = document.getElementById('saveOutfitBtn');
+      const goToCartBtn = document.getElementById('saveOutfitBtn');
 
-      // State Objects
+      // 3. State Objects
       let activeFilters = { category: 'all', season: 'all', color: 'all', search: '' };
       let outfitAssembly = { outerwear: null, tops: null, dresses: null, bottoms: null, shoes: null, bags: null };
 
-      // Filter Logic Engine
+      // 4. Filtering Engine
       function evaluateFilters() {
         cards.forEach(card => {
           const matchCat = activeFilters.category === 'all' || card.dataset.category === activeFilters.category;
           const matchSea = activeFilters.season === 'all' || card.dataset.season === activeFilters.season || card.dataset.season === 'all';
           const matchCol = activeFilters.color === 'all' || card.dataset.color === activeFilters.color;
-         
           const textSearch = activeFilters.search.toLowerCase();
-          const brandText = card.querySelector('.card-meta__brand').textContent.toLowerCase();
-          const nameText = card.querySelector('.card-meta__name').textContent.toLowerCase();
+          
+          const brandText = card.querySelector('.card-meta__brand')?.textContent.toLowerCase() || '';
+          const nameText = card.querySelector('.card-meta__name')?.textContent.toLowerCase() || '';
           const matchText = brandText.includes(textSearch) || nameText.includes(textSearch);
 
           if (matchCat && matchSea && matchCol && matchText) {
@@ -691,25 +992,14 @@
         });
       }
 
-      // Event Listeners: Search & Views
-      searchInput.addEventListener('input', (e) => {
-        activeFilters.search = e.target.value;
-        evaluateFilters();
-      });
+      // 5. Filter & View Event Listeners
+      if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+          activeFilters.search = e.target.value;
+          evaluateFilters();
+        });
+      }
 
-      gridToggle.addEventListener('click', () => {
-        gridToggle.classList.add('active');
-        listToggle.classList.remove('active');
-        archiveGrid.classList.remove('compact-list-view');
-      });
-
-      listToggle.addEventListener('click', () => {
-        listToggle.classList.add('active');
-        gridToggle.classList.remove('active');
-        archiveGrid.classList.add('compact-list-view');
-      });
-
-      // Navigation & Layout State Controls
       navItems.forEach(item => item.addEventListener('click', () => {
         navItems.forEach(n => n.classList.remove('active'));
         item.classList.add('active');
@@ -736,55 +1026,93 @@
         evaluateFilters();
       }));
 
-      // Favorite Feature Interaction
+      if (gridToggle && listToggle && archiveGrid) {
+        gridToggle.addEventListener('click', () => {
+          gridToggle.classList.add('active');
+          listToggle.classList.remove('active');
+          archiveGrid.classList.remove('compact-list-view');
+        });
+
+        listToggle.addEventListener('click', () => {
+          listToggle.classList.add('active');
+          gridToggle.classList.remove('active');
+          archiveGrid.classList.add('compact-list-view');
+        });
+      }
+
+      // 6. Size Selection & Favorites & Add to Outfit Engine
       cards.forEach(card => {
+        // Size Selector Handling
+        const sizeBtns = card.querySelectorAll('.size-btn');
+        sizeBtns.forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            sizeBtns.forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+          });
+        });
+
         const favBtn = card.querySelector('.favorite-trigger');
-        favBtn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          favBtn.classList.toggle('is-favorite');
-        });
+        if (favBtn) {
+          favBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            favBtn.classList.toggle('is-favorite');
+          });
+        }
 
-        // Add to Outfit System Pipeline
         const addBtn = card.querySelector('.add-to-outfit-btn');
-        addBtn.addEventListener('click', () => {
-          const id = card.dataset.id;
-          const category = card.dataset.category;
-          const brand = card.querySelector('.card-meta__brand').textContent;
-          const name = card.querySelector('.card-meta__name').textContent;
-          const priceRaw = card.querySelector('.mono-data').textContent;
-          const price = parseInt(priceRaw.replace(/[^0-9]/g, ''), 10);
+        if (addBtn) {
+          addBtn.addEventListener('click', () => {
+            const id = card.dataset.id;
+            const category = card.dataset.category;
+            const brand = card.querySelector('.card-meta__brand')?.textContent || '';
+            const name = card.querySelector('.card-meta__name')?.textContent || '';
+            const priceRaw = card.querySelector('.mono-data')?.textContent || '₹0';
+            
+            // Get selected size
+            const selectedSizeBtn = card.querySelector('.size-btn.selected');
+            const size = selectedSizeBtn ? selectedSizeBtn.textContent : 'M';
+            
+            // Extract numerical value from price string
+            const price = parseInt(priceRaw.replace(/[^0-9]/g, ''), 10) || 0;
 
-          outfitAssembly[category] = { id, brand, name, price, priceString: priceRaw };
-          renderOutfitCanvas();
-        });
+            outfitAssembly[category] = { id, brand, name, size, price, priceString: priceRaw };
+            renderOutfitCanvas();
+          });
+        }
       });
 
-      // Canvas Assembly Layout Engine
+      // 7. Render Outfit Canvas & Calculate Subtotal
       function renderOutfitCanvas() {
         let currentTotal = 0;
+
         slots.forEach(slot => {
           const type = slot.dataset.slotType;
           const chosen = outfitAssembly[type];
-          const innerContainer = slot.querySelector('.slot__empty') || slot.querySelector('.slot__filled-card');
-         
-          if (innerContainer) innerContainer.remove();
+
+          slot.innerHTML = `<div class="slot__label">${type.toUpperCase()}</div>`;
 
           if (chosen) {
             currentTotal += chosen.price;
+
             const cardMarkup = document.createElement('div');
             cardMarkup.className = 'slot__filled-card';
+            cardMarkup.style.cssText = 'cursor: pointer; padding: 6px 0; display: flex; justify-content: space-between; align-items: center;';
+            cardMarkup.title = 'Click to remove item from outfit';
             cardMarkup.innerHTML = `
               <div>
-                <strong>${chosen.brand}</strong>
-                <span>${chosen.name}</span>
+                <strong style="display: block; font-size: 0.85rem;">${chosen.brand} <span style="font-size: 0.75rem; color: #e63946;">(${chosen.size})</span></strong>
+                <span style="font-size: 0.8rem; color: #555;">${chosen.name}</span>
               </div>
-              <span class="mono-data">${chosen.priceString}</span>
+              <span class="mono-data" style="font-size: 0.85rem;">${chosen.priceString}</span>
             `;
-            // Clear current layout slot allocations when clicked
+
+            // Clicking populated slot removes item
             cardMarkup.addEventListener('click', () => {
               outfitAssembly[type] = null;
               renderOutfitCanvas();
             });
+
             slot.appendChild(cardMarkup);
           } else {
             const emptyMarkup = document.createElement('div');
@@ -793,12 +1121,28 @@
             slot.appendChild(emptyMarkup);
           }
         });
-        subtotalEl.textContent = `$${currentTotal.toLocaleString()}`;
+
+        // Dynamic Subtotal Price Formatting
+        if (subtotalEl) {
+          subtotalEl.textContent = `₹${currentTotal.toLocaleString()}`;
+        }
       }
 
-      saveBtn.addEventListener('click', () => {
-        alert('Configuration saved to lookbook database compilation.');
-      });
+      // 8. Go to Cart Action
+      if (goToCartBtn) {
+        goToCartBtn.addEventListener('click', () => {
+          const selectedItems = Object.values(outfitAssembly).filter(Boolean);
+          if (selectedItems.length === 0) {
+            alert('Your outfit canvas is empty. Add pieces to calculate your total!');
+          } else {
+            // Store total price and outfit items array in LocalStorage
+            localStorage.setItem('lastOutfitTotal', subtotalEl.textContent);
+            localStorage.setItem('outfitItems', JSON.stringify(selectedItems));
+            
+            window.location.href = 'cart.html';
+          }
+        });
+      }
     });
   </script>
 </body>
