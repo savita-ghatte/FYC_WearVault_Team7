@@ -3,6 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WearVault | Store • Style • Repeat</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #d7e8ff 0%, #ffe0ea 100%);
+            overflow: hidden;
+        }
+
+        .landing-card {
+            width: 92%;
+            max-width: 500px;
+            padding: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            animation: fadeIn 0.8s ease;
+            transition: transform 0.35s ease, filter 0.35s ease;
+        }
+
+        .landing-card:hover {
+            transform: translateY(-6px) scale(1.03);
+            filter: brightness(1.03);
+        }
+
+        .landing-card img {
+            width: 100%;
+            display: block;
+            border-radius: 45px;
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
+            transition: box-shadow 0.35s ease;
+        }
+
+        .landing-card:hover img {
+            box-shadow: 0 22px 50px rgba(0, 0, 0, 0.22);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .landing-card {
+                max-width: 420px;
+            }
+
+            .landing-card img {
+                border-radius: 35px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="landing-card" onclick="window.location.href='usmin.html'">
+        <img src="wear.jpeg" alt="WearVault - Store | Style | Repeat">
+    </div>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WearVault - Store | Style | Repeat</title>
     
     <style>
