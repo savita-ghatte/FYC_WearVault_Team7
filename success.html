@@ -1,37 +1,167 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Order Confirmed | WearVault</title>
-  <style>
-    body { font-family: 'DM Sans', sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background-color: #f9f8f4; text-align: center; }
-    .success-container { padding: 3rem; background: white; border: 1px solid #D6D3C8; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-    
-    /* Green Tick Animation */
-    .checkmark { width: 80px; height: 80px; border-radius: 50%; display: block; stroke-width: 4; stroke: #28a745; stroke-miterlimit: 10; margin: 0 auto 1.5rem; box-shadow: inset 0px 0px 0px #28a745; animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both; }
-    .checkmark__circle { stroke-dasharray: 166; stroke-dashoffset: 166; stroke-width: 4; stroke-miterlimit: 10; stroke: #28a745; fill: none; animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards; }
-    .checkmark__check { transform-origin: 50% 50%; stroke-dasharray: 48; stroke-dashoffset: 48; animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    @keyframes stroke { 100% { stroke-dashoffset: 0; } }
-    @keyframes scale { 0%, 100% { transform: none; } 50% { transform: scale3d(1.1, 1.1, 1); } }
-    @keyframes fill { 100% { box-shadow: inset 0px 0px 0px 30px #28a745; } }
+<title>Order Confirmed | WearVault</title>
 
-    h1 { color: #111; margin-bottom: 0.5rem; }
-    p { color: #555; margin-bottom: 2rem; }
-    .btn-home { padding: 12px 30px; background: #062c5c; color: white; text-decoration: none; border-radius: 4px; font-weight: bold; }
-  </style>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'DM Sans',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#d8e9ff,#edf5ff,#ffffff);
+    padding:20px;
+}
+
+.success-container{
+    width:430px;
+    max-width:100%;
+    text-align:center;
+    padding:45px 35px;
+    background:rgba(255,255,255,.85);
+    backdrop-filter:blur(12px);
+    border:1px solid rgba(255,255,255,.5);
+    border-radius:18px;
+    box-shadow:0 18px 40px rgba(0,0,0,.12);
+    animation:fadeIn .8s ease;
+}
+
+.checkmark{
+    width:90px;
+    height:90px;
+    border-radius:50%;
+    display:block;
+    stroke-width:4;
+    stroke:#28a745;
+    stroke-miterlimit:10;
+    margin:0 auto 25px;
+    box-shadow:inset 0 0 0 #28a745;
+    animation:fill .4s ease-in-out .4s forwards,
+              scale .3s ease-in-out .9s both;
+}
+
+.checkmark__circle{
+    stroke-dasharray:166;
+    stroke-dashoffset:166;
+    stroke-width:4;
+    stroke:#28a745;
+    fill:none;
+    animation:stroke .6s cubic-bezier(.65,0,.45,1) forwards;
+}
+
+.checkmark__check{
+    transform-origin:50% 50%;
+    stroke-dasharray:48;
+    stroke-dashoffset:48;
+    animation:stroke .3s cubic-bezier(.65,0,.45,1) .8s forwards;
+}
+
+@keyframes stroke{
+    100%{
+        stroke-dashoffset:0;
+    }
+}
+
+@keyframes scale{
+    0%,100%{
+        transform:none;
+    }
+    50%{
+        transform:scale(1.1);
+    }
+}
+
+@keyframes fill{
+    100%{
+        box-shadow:inset 0 0 0 40px #28a745;
+    }
+}
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(25px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+h1{
+    color:#062c5c;
+    font-size:32px;
+    margin-bottom:15px;
+    font-weight:700;
+}
+
+p{
+    color:#555;
+    font-size:16px;
+    line-height:1.7;
+    margin-bottom:30px;
+}
+
+.btn-home{
+    display:inline-block;
+    padding:14px 34px;
+    background:#062c5c;
+    color:#fff;
+    text-decoration:none;
+    font-weight:600;
+    border-radius:8px;
+    transition:.3s;
+}
+
+.btn-home:hover{
+    background:#0b4b95;
+    transform:translateY(-3px);
+    box-shadow:0 10px 20px rgba(6,44,92,.25);
+}
+
+</style>
+
 </head>
+
 <body>
 
 <div class="success-container">
-  <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
-    <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
-    <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
-  </svg>
-  <h1>Order Confirmed!</h1>
-  <p>Your order has been placed successfully. Thank you for shopping with WearVault.</p>
-  <a href="index.html" class="btn-home">Continue Shopping</a>
+
+    <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+        <circle class="checkmark__circle"
+                cx="26"
+                cy="26"
+                r="25"
+                fill="none"/>
+        <path class="checkmark__check"
+              fill="none"
+              d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+    </svg>
+
+    <h1>Order Confirmed!</h1>
+
+    <p>
+        Your order has been placed successfully.
+        Thank you for shopping with <strong>WearVault</strong>.
+    </p>
+
+    <a href="index.html" class="btn-home">
+        Continue Shopping
+    </a>
+
 </div>
 
 </body>
